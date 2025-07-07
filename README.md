@@ -13,23 +13,29 @@
 
   ![](/images/2025-07-07_170556.png)
 ### Установка утилит OTA в SimpleLink Low Power F3 SDK 8.40.02.01
-  Скопировать из репозитария архив zstack.zip в папку C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools
+  Скопировать из репозитария архив zstack.zip в папку C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools.
   Из нее нам потребуется генератор OTA файлов C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools\zstack\zigbee_ota_image_converter\zOTAfileGen.exe
 ### Создаем рабочую область
 #### 1. Запускаем приложение Code Composer Studio 12.8.1
   ![](/images/2025-07-07_175618.png)
 #### 2. Импортируем в рабочую область пример mcuboot
+```ruby
 C:\ti\simplelink_lowpower_f3_sdk_9_10_00_83\examples\nortos\LP_EM_CC2340R5\mcuboot\mcuboot\ticlang
+```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_184241.png)
   ![](/images/2025-07-07_184620.png)
 #### 3. Импортируем в рабочую область пример onoff_switch_ota_client_onchip
+```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_onchip\freertos\ticlang
+```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_185545.png)
   ![](/images/2025-07-07_185742.png)
 #### 4. Импортируем в рабочую область пример onoff_switch_ota_client_offchip
+```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_offchip\freertos\ticlang
+```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_190403.png)
   ![](/images/2025-07-07_190522.png)
