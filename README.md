@@ -38,3 +38,7 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
 ![](/images/2025-07-07_192122.png)
 #### 2. Для примера onoff_switch_ota_client_offchip
 ![](/images/2025-07-07_193615.png)
+### Собираем проект mcuboot
+![](/images/2025-07-07_194940.png)
+### Прошиваем проект mcuboot
+![](/images/2025-07-07_195339.png)
