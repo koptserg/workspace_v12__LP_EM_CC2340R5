@@ -130,6 +130,6 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
   ![](/images/2025-07-07_205148.png)
 #### 7. Прошиваем проект onoff_switch_ota_client_onchip 
   ![](/images/2025-07-07_210751.png)
-#### 8. Для старта на девворде LP-EM-CC2350R5 давим кнопку Reset
+#### 8. Для старта на девборде LP-EM-CC2350R5 давим кнопку Reset
 ### Правки в поекте onoff_switch_ota_client_offchip
   Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
