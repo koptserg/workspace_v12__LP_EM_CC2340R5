@@ -1,0 +1,90 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5RKP" --part "Default" --package "RKP" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @v2CliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5" --package "VQFN (RKP)" --variant "CC2340R52" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const FreeRTOS = scripting.addModule("/freertos/FreeRTOS");
+const CCFG     = scripting.addModule("/ti/devices/CCFG");
+const rfdesign = scripting.addModule("/ti/devices/radioconfig/rfdesign");
+const GPIO     = scripting.addModule("/ti/drivers/GPIO");
+const GPIO1    = GPIO.addInstance();
+const GPIO2    = GPIO.addInstance();
+const GPIO3    = GPIO.addInstance();
+const GPIO4    = GPIO.addInstance();
+const NVS      = scripting.addModule("/ti/drivers/NVS", {}, false);
+const NVS2     = NVS.addInstance();
+const Settings = scripting.addModule("/ti/posix/freertos/Settings");
+const zigbee   = scripting.addModule("/ti/zigbee/zigbee");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+FreeRTOS.heapSize       = 0x00001BBC;
+FreeRTOS.idleStackSize  = 0x00000100;
+FreeRTOS.timerStackSize = 0x00000100;
+
+CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC23X0Template0";
+
+GPIO1.$hardware = system.deviceData.board.components.LED_GREEN;
+GPIO1.$name     = "CONFIG_GPIO_GLED";
+
+GPIO2.$hardware = system.deviceData.board.components.LED_RED;
+GPIO2.$name     = "CONFIG_GPIO_RLED";
+
+GPIO3.$hardware        = system.deviceData.board.components["BTN-1"];
+GPIO3.$name            = "CONFIG_GPIO_BTN1";
+GPIO3.pull             = "Pull Up";
+GPIO3.interruptTrigger = "Falling Edge";
+
+GPIO4.$hardware        = system.deviceData.board.components["BTN-2"];
+GPIO4.$name            = "CONFIG_GPIO_BTN2";
+GPIO4.pull             = "Pull Up";
+GPIO4.interruptTrigger = "Falling Edge";
+
+NVS2.nvsType                  = "External";
+NVS2.$name                    = "CONFIG_NVSEXTERNAL";
+NVS2.$hardware                = system.deviceData.board.components.MX25R8035F;
+NVS2.externalFlash.$name      = "ti_drivers_nvs_NVSSPI25X0";
+NVS2.externalFlash.regionSize = 0x79000;
+
+const NVSSPI25XDevice                        = scripting.addModule("/ti/drivers/nvs/NVSSPI25XDevice", {}, false);
+const NVSSPI25XDevice1                       = NVSSPI25XDevice.addInstance({}, false);
+NVSSPI25XDevice1.$name                       = "CONFIG_NVS_SPI_0";
+NVS2.externalFlash.spiFlashDevice            = NVSSPI25XDevice1;
+NVSSPI25XDevice1.chipSelectPinInstance.$name = "CONFIG_GPIO_0";
+
+const SPI                          = scripting.addModule("/ti/drivers/SPI", {}, false);
+const SPI1                         = SPI.addInstance({}, false);
+SPI1.$name                         = "CONFIG_SPI_0";
+NVSSPI25XDevice1.sharedSpiInstance = SPI1;
+
+zigbee.deviceType         = ["zed"];
+zigbee.powerModeOperation = "alwaysOn";
+zigbee.primaryChannels    = [21];
+
+const RNG       = scripting.addModule("/ti/drivers/RNG", {}, false);
+RNG.rngPoolSize = 512;
+scripting.suppress("This the default noise conditioning key provided by TI, which is acceptable per NIST SP 800-90B\\. However, TI recommends you change this default value to a custom random value for your product", RNG, "noiseConditioningKeyW3");
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.gpioPin.$suggestSolution               = "boosterpack.40";
+GPIO2.gpioPin.$suggestSolution               = "boosterpack.39";
+GPIO3.gpioPin.$suggestSolution               = "boosterpack.13";
+GPIO4.gpioPin.$suggestSolution               = "boosterpack.12";
+NVSSPI25XDevice1.chipSelect.$suggestSolution = "boosterpack.38";
+SPI1.spi.$suggestSolution                    = "SPI0";
+SPI1.spi.sclkPin.$suggestSolution            = "boosterpack.7";
+SPI1.spi.dmaRxChannel.$suggestSolution       = "DMA_CH1";
+SPI1.spi.dmaTxChannel.$suggestSolution       = "DMA_CH0";
+SPI1.spi.pociPin.$suggestSolution            = "boosterpack.14";
+SPI1.spi.picoPin.$suggestSolution            = "boosterpack.15";
