@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//Debug/bootutil/src/subdir_rules.mk=UTF-8
+encoding//Debug/bootutil/src/subdir_vars.mk=UTF-8
+encoding//Debug/flash_map_backend/subdir_rules.mk=UTF-8
+encoding//Debug/flash_map_backend/subdir_vars.mk=UTF-8
+encoding//Debug/makefile=UTF-8
+encoding//Debug/mbedtls-asn1/subdir_rules.mk=UTF-8
+encoding//Debug/mbedtls-asn1/subdir_vars.mk=UTF-8
+encoding//Debug/mcuboot_config/subdir_rules.mk=UTF-8
+encoding//Debug/mcuboot_config/subdir_vars.mk=UTF-8
+encoding//Debug/objects.mk=UTF-8
+encoding//Debug/sources.mk=UTF-8
+encoding//Debug/subdir_rules.mk=UTF-8
+encoding//Debug/subdir_vars.mk=UTF-8
+encoding//Debug/ti-crypto/subdir_rules.mk=UTF-8
+encoding//Debug/ti-crypto/subdir_vars.mk=UTF-8

@@ -1,0 +1,53 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5RKP" --part "Default" --package "RKP" --rtos "nortos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @v2CliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5" --package "VQFN (RKP)" --variant "CC2340R52" --rtos "nortos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const mcuboot = scripting.addModule("/ti/common/mcuboot");
+const CCFG    = scripting.addModule("/ti/devices/CCFG");
+const Board   = scripting.addModule("/ti/drivers/Board");
+const GPIO    = scripting.addModule("/ti/drivers/GPIO");
+const GPIO1   = GPIO.addInstance();
+const GPIO2   = GPIO.addInstance();
+const GPIO3   = GPIO.addInstance();
+const GPIO4   = GPIO.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+mcuboot.mode           = "overwrite";
+mcuboot.bootloaderSize = 0x00004000;
+mcuboot.primaryBase1   = 0x00004000;
+mcuboot.primarySize1   = 0x0003D800;
+mcuboot.secondaryBase1 = 0x00041800;
+mcuboot.secondarySize1 = 0x0003D800;
+
+CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC26XXTemplate0";
+
+GPIO1.$hardware = system.deviceData.board.components.LED_RED;
+GPIO1.$name     = "CONFIG_GPIO_LED_0";
+
+GPIO2.$hardware = system.deviceData.board.components.LED_GREEN;
+GPIO2.$name     = "CONFIG_GPIO_LED_1";
+
+GPIO3.$hardware = system.deviceData.board.components["BTN-1"];
+GPIO3.$name     = "CONFIG_GPIO_BUTTON_0";
+
+GPIO4.$hardware = system.deviceData.board.components["BTN-2"];
+GPIO4.$name     = "CONFIG_GPIO_BUTTON_1";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.gpioPin.$suggestSolution = "boosterpack.39";
+GPIO2.gpioPin.$suggestSolution = "boosterpack.40";
+GPIO3.gpioPin.$suggestSolution = "boosterpack.13";
+GPIO4.gpioPin.$suggestSolution = "boosterpack.12";
