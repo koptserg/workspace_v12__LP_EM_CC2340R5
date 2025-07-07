@@ -51,6 +51,7 @@ ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_c
 
   ![](/images/2025-07-07_203635.png)
 #### 3.Добавляем макросы on_off_switch_ota_client.h
+```ruby
 #define ZB_HA_ON_OFF_SWITCH_OTA_IN_CLUSTER_NUM 3  /*!< On/Off switch IN clusters number */
 #define ZB_HA_ON_OFF_SWITCH_OTA_OUT_CLUSTER_NUM 5 /*!< On/Off switch OUT clusters number */
 
@@ -99,7 +100,7 @@ ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_c
 
 #define ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(device_ctx, ep_name) \
   ZBOSS_DECLARE_DEVICE_CTX_1_EP(device_ctx, ep_name)
-
+```
   ![](/images/2025-07-07_201728.png)
 #### 4. Изменяем декларацию эндпойнта on_off_switch_ota_client.c
 /* Declare endpoint */
@@ -120,3 +121,5 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 #### 7. Прошиваем проект onoff_switch_ota_client_onchip 
   ![](/images/2025-07-07_210751.png)
 #### 8. Для старта на девворде LP-EM-CC2350R5 давим кнопку Reset
+### Правки в поекте onoff_switch_ota_client_offchip
+  Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
