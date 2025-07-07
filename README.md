@@ -33,5 +33,8 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_190403.png)
   ![](/images/2025-07-07_190522.png)
-
-
+### Настраиваем конфиг mcuboot.syscfg
+#### 1. Для примера onoff_switch_ota_client_onchip
+![](/images/2025-07-07_192122.png)
+#### 2. Для примера onoff_switch_ota_client_offchip
+![](/images/2025-07-07_193615.png)
