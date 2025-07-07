@@ -47,8 +47,9 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
   ![](/images/2025-07-07_211623.png)
   ![](/images/2025-07-07_205929.png)
 #### 2.Добавляем генератор zigbee файла OTAfileGen в Post-build steps
+```ruby
 ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_converter/zOTAfileGen ${BuildDirectory}/${BuildArtifactFileBaseName}_ota.bin ${BuildDirectory}/    BEBE 2340 00000002
-
+```
   ![](/images/2025-07-07_203635.png)
 #### 3.Добавляем макросы on_off_switch_ota_client.h
 ```ruby
@@ -103,18 +104,20 @@ ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_c
 ```
   ![](/images/2025-07-07_201728.png)
 #### 4. Изменяем декларацию эндпойнта on_off_switch_ota_client.c
+```ruby
 /* Declare endpoint */
 ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_EP(on_off_switch_ep, ZB_SWITCH_ENDPOINT, on_off_switch_clusters);
 /* Declare application's device context for single-endpoint device */
 ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
-
+```
   ![](/images/2025-07-07_202253.png)
 #### 5. Добавляем переменные on_off_switch_ota_client.c
+```ruby
   g_dev_ctx.basic_attr.mf_name[0] = 6;
   strcpy(g_dev_ctx.basic_attr.mf_name + 1, "DIYRuZ");
   g_dev_ctx.basic_attr.model_id[0] = 15;
   strcpy(g_dev_ctx.basic_attr.model_id + 1, "DIYRuZ_SW2340R5");
-
+```
   ![](/images/2025-07-07_202656.png)
 #### 6. Собираем проект onoff_switch_ota_client_onchip  
   ![](/images/2025-07-07_205148.png)
