@@ -18,5 +18,8 @@
 ### Создаем рабочую область
 1. Запускаем приложение Code Composer Studio 12.8.1
   ![](/images/2025-07-07_175618.png)
-2. Добавляем в рабочую область пример mcuboot
+2. Импортируем в рабочую область пример mcuboot
+C:\ti\simplelink_lowpower_f3_sdk_9_10_00_83\examples\nortos\LP_EM_CC2340R5\mcuboot\mcuboot\ticlang
+![](/images/2025-07-07_180639.png)
+![](/images/2025-07-07_ 181351.png)
 
