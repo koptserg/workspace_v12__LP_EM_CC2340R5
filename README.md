@@ -28,3 +28,10 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_185545.png)
   ![](/images/2025-07-07_185742.png)
+4. Импортируем в рабочую область пример onoff_switch_ota_client_offchip
+C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_offchip\freertos\ticlang
+  ![](/images/2025-07-07_180639.png)
+  ![](/images/2025-07-07_190403.png)
+  ![](/images/2025-07-07_190522.png)
+
+
