@@ -44,12 +44,13 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
 ![](/images/2025-07-07_195339.png)
 ### Правки в поекте onoff_switch_ota_client_onchip
 #### 1.Настраиваем конфиг on_off_switch_ota_client_onchip.syscfg
+  ![](/images/2025-07-07_211623.png)
   ![](/images/2025-07-07_205929.png)
-#### 1.Добавляем генератор zigbee файла OTAfileGen в Post-build steps
+#### 2.Добавляем генератор zigbee файла OTAfileGen в Post-build steps
 ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_converter/zOTAfileGen ${BuildDirectory}/${BuildArtifactFileBaseName}_ota.bin ${BuildDirectory}/    BEBE 2340 00000002
 
   ![](/images/2025-07-07_203635.png)
-#### 2.Добавляем макросы on_off_switch_ota_client.h
+#### 3.Добавляем макросы on_off_switch_ota_client.h
 #define ZB_HA_ON_OFF_SWITCH_OTA_IN_CLUSTER_NUM 3  /*!< On/Off switch IN clusters number */
 #define ZB_HA_ON_OFF_SWITCH_OTA_OUT_CLUSTER_NUM 5 /*!< On/Off switch OUT clusters number */
 
@@ -100,21 +101,22 @@ ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/tools/zstack/zigbee_ota_image_c
   ZBOSS_DECLARE_DEVICE_CTX_1_EP(device_ctx, ep_name)
 
   ![](/images/2025-07-07_201728.png)
-#### 3. Изменяем декларацию эндпойнта on_off_switch_ota_client.c
+#### 4. Изменяем декларацию эндпойнта on_off_switch_ota_client.c
 /* Declare endpoint */
 ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_EP(on_off_switch_ep, ZB_SWITCH_ENDPOINT, on_off_switch_clusters);
 /* Declare application's device context for single-endpoint device */
 ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 
   ![](/images/2025-07-07_202253.png)
-#### 4. Добавляем переменные on_off_switch_ota_client.c
+#### 5. Добавляем переменные on_off_switch_ota_client.c
   g_dev_ctx.basic_attr.mf_name[0] = 6;
   strcpy(g_dev_ctx.basic_attr.mf_name + 1, "DIYRuZ");
   g_dev_ctx.basic_attr.model_id[0] = 15;
   strcpy(g_dev_ctx.basic_attr.model_id + 1, "DIYRuZ_SW2340R5");
 
   ![](/images/2025-07-07_202656.png)
-#### 5. Собираем проект onoff_switch_ota_client_onchip  
+#### 6. Собираем проект onoff_switch_ota_client_onchip  
   ![](/images/2025-07-07_205148.png)
-#### 6. Прошиваем проект onoff_switch_ota_client_onchip 
+#### 7. Прошиваем проект onoff_switch_ota_client_onchip 
   ![](/images/2025-07-07_210751.png)
+#### 8. Для старта на девворде LP-EM-CC2350R5 давим кнопку Reset
