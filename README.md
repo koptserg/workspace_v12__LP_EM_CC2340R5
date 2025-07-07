@@ -7,10 +7,13 @@
 ### Скачиваем и устанавливаем инструменты
 1. [SimpleLink Low Power F3 SDK 8.40.02.01](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-emMPuXshOG/8.40.02.01/simplelink_lowpower_f3_sdk_8_40_02_01.exe)
 2. [Code Composer Studio 12.8.1](https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-J1VdearkvK/12.8.1/CCS12.8.1.00005_win64.zip)
+
   ![](/images/2025-07-07_170556.png)
+
 #### или 
 1. [SimpleLink Low Power F3 SDK 9.11.00.18](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-emMPuXshOG/9.11.00.18/simplelink_lowpower_f3_sdk_9_11_00_18.exe)
 2. [Code Composer Studio 20.2.0](https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-J1VdearkvK/20.2.0/CCS_20.2.0.00012_win.zip)
+
    ![](/images/2025-07-07_171007.png)
-### Создаем пример onoff_switch_ota_client_onchip
-1. Создаем файл прошивки 
+### Создаем рабочую область
+1. Запускаем приложение 
