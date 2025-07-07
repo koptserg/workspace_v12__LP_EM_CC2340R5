@@ -1,5 +1,6 @@
 ### Список литературы:
-1. Описание SDK [SimpleLink Low Power F3 SDK 9.11.00.18](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/zigbee/html/zboss-guide/index-cc23xx.html)
-2. Описание SDK [SimpleLink Low Power F3 SDK 8.40.02.01](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/8.40.02.01/exports/docs/zigbee/html/zboss-guide/index-cc23xx.html)
-3. Подождите, в случае успешного подключения светодиод D1 устройства мигнет 5 раз.
-4. Если подключение не удалось, светодиод D1 устройства мигнет 3 раза.
+1. Руководство пользователя [SimpleLink Low Power F3 SDK 9.11.00.18](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/zigbee/html/zboss-guide/index-cc23xx.html)
+2. Руководство пользователя [SimpleLink Low Power F3 SDK 8.40.02.01](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/8.40.02.01/exports/docs/zigbee/html/zboss-guide/index-cc23xx.html)
+3. Руководство пользователя [Code Composer Studio 20.2.0 ](https://software-dl.ti.com/ccs/esd/documents/users_guide/index_getting-started.html)
+4. Руководство пользователя [Code Composer Studio 12.98.0 ](https://software-dl.ti.com/ccs/esd/documents/users_guide_12.8.0/ccs_getting-started.html)
+5. 
