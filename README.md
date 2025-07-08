@@ -18,21 +18,21 @@
 ### Создаем рабочую область
 #### 1. Запускаем приложение Code Composer Studio 12.8.1
   ![](/images/2025-07-07_175618.png)
-#### 2. Импортируем в рабочую область пример mcuboot
+#### 2. Импортируем в рабочую область проект mcuboot
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_9_10_00_83\examples\nortos\LP_EM_CC2340R5\mcuboot\mcuboot\ticlang
 ```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_184241.png)
   ![](/images/2025-07-07_184620.png)
-#### 3. Импортируем в рабочую область пример onoff_switch_ota_client_onchip
+#### 3. Импортируем в рабочую область проект onoff_switch_ota_client_onchip
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_onchip\freertos\ticlang
 ```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_185545.png)
   ![](/images/2025-07-07_185742.png)
-#### 4. Импортируем в рабочую область пример onoff_switch_ota_client_offchip
+#### 4. Импортируем в рабочую область проект onoff_switch_ota_client_offchip
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_offchip\freertos\ticlang
 ```
