@@ -155,4 +155,5 @@ ti_log_Log_ENABLE
 ![](/images/2025-07-08_120136.png)
 ![](/images/2025-07-08_120626.png)
 ![](/images/2025-07-08_121233.png)
-![](/images/2025-07-08_114948.png)
+#### 2. Переходим в режим Debug, открываем ROV(Runtime Object View), нажимаем Resume(F8)
+![](/images/2025-07-08_122417.png)
