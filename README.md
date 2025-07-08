@@ -141,3 +141,14 @@ C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboo
 C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
 ```
    ![](/images/2025-07-08_104419.png)
+### Отладка проекта onoff_switch_ota_client_onchip с выводом Log_printf() в ROV(Runtime Object View)
+#### 1. Добавим в File Search Path библиотеку
+```ruby
+${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/log/lib/ticlang/m0p/log_cc23x0r5.a
+```
+![](/images/2025-07-08_113744.png)
+#### 1. Добавим в Predefined Symbols 
+```ruby
+ti_log_Log_ENABLE
+```
+![](/images/2025-07-08_114948.png)
