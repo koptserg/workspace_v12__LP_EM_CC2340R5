@@ -54,6 +54,7 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_3.2.compilerID.DEFINE.543177768" name="Pre-define NAME (-D)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_3.2.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_SYMBOLS}"/>
+									<listOptionValue builtIn="false" value="ti_log_Log_ENABLE"/>
 									<listOptionValue builtIn="false" value="${SYSCONFIG_TOOL_SYMBOLS}"/>
 									<listOptionValue builtIn="false" value="OTA_OFFCHIP"/>
 									<listOptionValue builtIn="false" value="SYNC_WRITE"/>
@@ -92,6 +93,7 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_3.2.linkerID.LIBRARY.803819132" name="Include library file or command file as input (--library, -l)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_3.2.linkerID.LIBRARY" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_LIBRARIES}"/>
+									<listOptionValue builtIn="false" value="${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/log/lib/ticlang/m0p/log_cc23x0r5.a"/>
 									<listOptionValue builtIn="false" value="${SYSCONFIG_TOOL_LIBRARIES}"/>
 									<listOptionValue builtIn="false" value="ti_utils_build_linker.cmd.genlibs"/>
 									<listOptionValue builtIn="false" value="libc.a"/>

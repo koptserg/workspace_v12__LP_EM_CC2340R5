@@ -47,8 +47,8 @@ GPIO4.interruptTrigger = "Falling Edge";
 
 zigbee.deviceType                          = ["zed"];
 zigbee.powerModeOperation                  = "alwaysOn";
-zigbee.primaryChannels                     = [21];
 zigbee.loggingEnabled                      = true;
+zigbee.primaryChannels                     = [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
 zigbee.LogModuleZigbeeLLMAC.enable_INFO    = true;
 zigbee.LogModuleZigbeeLLMAC.enable_VERBOSE = true;
 zigbee.LogModuleZigbeeLLMAC.enable_DEBUG   = true;

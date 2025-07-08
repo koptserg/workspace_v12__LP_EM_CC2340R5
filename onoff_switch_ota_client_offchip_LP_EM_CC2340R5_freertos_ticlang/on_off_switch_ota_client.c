@@ -132,9 +132,9 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CLUSTER_LIST(on_off_switch_clusters,
                                                      ota_upgrade_attr_list);
 
 /* Declare endpoint */
-ZB_HA_DECLARE_ON_OFF_SWITCH_EP(on_off_switch_ep, ZB_SWITCH_ENDPOINT, on_off_switch_clusters);
+ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_EP(on_off_switch_ep, ZB_SWITCH_ENDPOINT, on_off_switch_clusters);
 /* Declare application's device context for single-endpoint device */
-ZB_HA_DECLARE_ON_OFF_SWITCH_CTX(on_off_switch_ctx, on_off_switch_ep);
+ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 
 void my_main_loop()
 {
@@ -157,9 +157,14 @@ MAIN()
   g_dev_ctx.basic_attr.power_source = ZB_ZCL_BASIC_POWER_SOURCE_DEFAULT_VALUE;
   g_dev_ctx.identify_attr.identify_time = 0;
 
+  g_dev_ctx.basic_attr.mf_name[0] = 6;
+  strcpy(g_dev_ctx.basic_attr.mf_name + 1, "DIYRuZ");
+  g_dev_ctx.basic_attr.model_id[0] = 15;
+  strcpy(g_dev_ctx.basic_attr.model_id + 1, "DIYRuZ_SW2340R5");
+
   g_dev_ctx.ota_attr.manufacturer = 0xBEBE;
   g_dev_ctx.ota_attr.image_type = 0x2340;
-  g_dev_ctx.ota_attr.file_version = 0x00000001;
+  g_dev_ctx.ota_attr.file_version = 0x00000002;
 
   /* Global ZBOSS initialization */
   ZB_INIT("on_off_switch");

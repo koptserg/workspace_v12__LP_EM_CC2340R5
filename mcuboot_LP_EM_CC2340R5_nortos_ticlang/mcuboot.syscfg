@@ -24,9 +24,9 @@ const GPIO4   = GPIO.addInstance();
 mcuboot.mode           = "overwrite";
 mcuboot.bootloaderSize = 0x00004000;
 mcuboot.primaryBase1   = 0x00004000;
-mcuboot.primarySize1   = 0x0003D800;
-mcuboot.secondaryBase1 = 0x00041800;
-mcuboot.secondarySize1 = 0x0003D800;
+mcuboot.externalFlash  = true;
+mcuboot.primarySize1   = 0x00070000;
+mcuboot.secondarySize1 = 0x00070000;
 
 CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC26XXTemplate0";
 
