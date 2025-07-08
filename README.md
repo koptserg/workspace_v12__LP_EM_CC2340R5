@@ -13,7 +13,7 @@
 2. [Code Composer Studio 12.8.1](https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-J1VdearkvK/12.8.1/CCS12.8.1.00005_win64.zip)
 3. [UniFlash 9.2.0](https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/9.2.0/uniflash_sl.9.2.0.5300.exe)
 
-  ![](/images/2025-07-07_170556.png)
+  ![](/images/2025-07-08_111020.png)
 ### Установка утилит OTA в SimpleLink Low Power F3 SDK 8.40.02.01
   Скопировать из репозитария архив zstack.zip в папку C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools.
   Из нее нам потребуется генератор OTA файлов C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools\zstack\zigbee_ota_image_converter\zOTAfileGen.exe
