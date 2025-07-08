@@ -1,9 +1,10 @@
+## Быстрый старт чипа CC2340R5
 ### Список литературы:
 1. Руководство пользователя [SimpleLink Low Power F3 SDK 8.40.02.01](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/8.40.02.01/exports/docs/zigbee/html/zboss-guide/index-cc23xx.html)
 2. Руководство пользователя [Code Composer Studio 12.8.0 ](https://software-dl.ti.com/ccs/esd/documents/users_guide_12.8.0/ccs_getting-started.html)
 3. Разработка с ZBOSS для Zigbee [Developing with ZBOSS for Zigbee](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/third_party/zboss_r23/doxygen/html/index.html)
 ### Аппаратные средства
-1. LP-EM-CC2350R5 RKP
+1. LP-EM-CC2340R5 RKP
 2. LP-XDS110(ET)
    
   ![](/images/photo_2025-07-07_22-03-15.jpg)
@@ -18,21 +19,21 @@
 ### Создаем рабочую область
 #### 1. Запускаем приложение Code Composer Studio 12.8.1
   ![](/images/2025-07-07_175618.png)
-#### 2. Импортируем в рабочую область пример mcuboot
+#### 2. Импортируем в рабочую область проект mcuboot
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_9_10_00_83\examples\nortos\LP_EM_CC2340R5\mcuboot\mcuboot\ticlang
 ```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_184241.png)
   ![](/images/2025-07-07_184620.png)
-#### 3. Импортируем в рабочую область пример onoff_switch_ota_client_onchip
+#### 3. Импортируем в рабочую область проект onoff_switch_ota_client_onchip
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_onchip\freertos\ticlang
 ```
   ![](/images/2025-07-07_180639.png)
   ![](/images/2025-07-07_185545.png)
   ![](/images/2025-07-07_185742.png)
-#### 4. Импортируем в рабочую область пример onoff_switch_ota_client_offchip
+#### 4. Импортируем в рабочую область проект onoff_switch_ota_client_offchip
 ```ruby
 C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\onoff_switch_ota_client_offchip\freertos\ticlang
 ```
@@ -130,6 +131,12 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
   ![](/images/2025-07-07_205148.png)
 #### 7. Прошиваем проект onoff_switch_ota_client_onchip 
   ![](/images/2025-07-07_210751.png)
-#### 8. Для старта на девворде LP-EM-CC2350R5 давим кнопку Reset
+#### 8. Для старта на девборде LP-EM-CC2340R5 давим кнопку Reset
 ### Правки в поекте onoff_switch_ota_client_offchip
   Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
+### Прошивка с помощью UniFlash 9.1.0 проектов mcuboot и onoff_switch_ota_client_offchip
+```ruby
+C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex
+C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
+```ruby
+![](/images/2025-07-08_104419.png)
