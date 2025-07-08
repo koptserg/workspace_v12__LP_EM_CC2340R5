@@ -3,7 +3,7 @@
 2. Руководство пользователя [Code Composer Studio 12.8.0 ](https://software-dl.ti.com/ccs/esd/documents/users_guide_12.8.0/ccs_getting-started.html)
 3. Разработка с ZBOSS для Zigbee [Developing with ZBOSS for Zigbee](https://software-dl.ti.com/simplelink/esd/simplelink_lowpower_f3_sdk/9.11.00.18/exports/docs/third_party/zboss_r23/doxygen/html/index.html)
 ### Аппаратные средства
-1. LP-EM-CC2350R5 RKP
+1. LP-EM-CC2340R5 RKP
 2. LP-XDS110(ET)
    
   ![](/images/photo_2025-07-07_22-03-15.jpg)
