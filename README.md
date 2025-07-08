@@ -134,3 +134,9 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 #### 8. Для старта на девборде LP-EM-CC2340R5 давим кнопку Reset
 ### Правки в поекте onoff_switch_ota_client_offchip
   Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
+### Прошивка с помощью UniFlash 9.1.0 проектов mcuboot и onoff_switch_ota_client_offchip
+```ruby
+C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex
+C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
+```ruby
+![](/images/2025-07-08_104419.png)
