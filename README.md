@@ -11,8 +11,9 @@
 ### Скачиваем и устанавливаем инструменты
 1. [SimpleLink Low Power F3 SDK 8.40.02.01](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-emMPuXshOG/8.40.02.01/simplelink_lowpower_f3_sdk_8_40_02_01.exe)
 2. [Code Composer Studio 12.8.1](https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-J1VdearkvK/12.8.1/CCS12.8.1.00005_win64.zip)
+3. [UniFlash 9.2.0](https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/9.2.0/uniflash_sl.9.2.0.5300.exe)
 
-  ![](/images/2025-07-07_170556.png)
+  ![](/images/2025-07-08_111020.png)
 ### Установка утилит OTA в SimpleLink Low Power F3 SDK 8.40.02.01
   Скопировать из репозитария архив zstack.zip в папку C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools.
   Из нее нам потребуется генератор OTA файлов C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\tools\zstack\zigbee_ota_image_converter\zOTAfileGen.exe
@@ -134,9 +135,9 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 #### 8. Для старта на девборде LP-EM-CC2340R5 давим кнопку Reset
 ### Правки в поекте onoff_switch_ota_client_offchip
   Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
-### Прошивка с помощью UniFlash 9.1.0 проектов mcuboot и onoff_switch_ota_client_offchip
+### Прошивка с помощью UniFlash 9.2.0 проектов mcuboot и onoff_switch_ota_client_onchip
 ```ruby
 C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex
 C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
-```ruby
-![](/images/2025-07-08_104419.png)
+```
+   ![](/images/2025-07-08_104419.png)
