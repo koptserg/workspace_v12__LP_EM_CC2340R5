@@ -151,4 +151,8 @@ ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/log/lib/ticlang/m0p/l
 ```ruby
 ti_log_Log_ENABLE
 ```
+#### 2. В конфиге on_off_switch_ota_client_onchip.syscfg включим Enable Logging
+![](/images/2025-07-08_120136.png)
+![](/images/2025-07-08_120626.png)
+![](/images/2025-07-08_121233.png)
 ![](/images/2025-07-08_114948.png)
