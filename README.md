@@ -143,7 +143,11 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
 будет создан файл прошивки 
 ```ruby
 C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
-```  
+```
+и файл образа .zigbee для OTA
+```ruby
+C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\BEBE-2340-00000002.zigbee
+```
   ![](/images/2025-07-07_205148.png)
 ### Прошивка с помощью UniFlash 9.2.0 проектов mcuboot и onoff_switch_ota_client_onchip
 ```ruby
