@@ -57,9 +57,9 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
    5. Image 1 -> Secondary Image - Base Address: ```0x00000000```, Image Size: ```0x00070000```
 ![](/images/2025-07-07_193615.png)
 ### Собираем проект mcuboot
+будет создан файл прошивки 
+```C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex```
 ![](/images/2025-07-07_194940.png)
-### Прошиваем проект mcuboot
-![](/images/2025-07-07_195339.png)
 ### Правки в поекте onoff_switch_ota_client_onchip
 #### 1.Настраиваем конфиг on_off_switch_ota_client_onchip.syscfg
   ![](/images/2025-07-07_211623.png)
