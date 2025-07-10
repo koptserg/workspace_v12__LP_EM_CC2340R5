@@ -157,7 +157,7 @@ C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_free
    ![](/images/2025-07-08_104419.png)
 ### Правки в поекте onoff_switch_ota_client_offchip
   Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
-### Управление устройством
+## Управление устройством
 #### Добавить устройство в сеть
    1. Коротко нажать кнопку сброс или сбросить по питанию.
    2. Дождаться добавление в сеть.
@@ -167,7 +167,7 @@ C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_free
    3. Дождаться выхода из сети, затем отпустить кнопку BTN-1(BTN-2).
 #### Отправить команду переключения Send On/Off Toggle
    1. Коротко нажать кнопку BTN-1.
-### Отладка проекта onoff_switch_ota_client_onchip с выводом Log_printf() в ROV(Runtime Object View)
+## Отладка проекта onoff_switch_ota_client_onchip с выводом Log_printf() в ROV(Runtime Object View)
 #### 1. Добавим в File Search Path библиотеку
 ```ruby
 ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/log/lib/ticlang/m0p/log_cc23x0r5.a
