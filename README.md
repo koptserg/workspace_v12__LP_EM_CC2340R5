@@ -43,13 +43,13 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
   ![](/images/2025-07-07_190522.png)
 
 ### Настраиваем конфиг mcuboot.syscfg
-#### 1. Для примера onoff_switch_ota_client_onchip
+#### 1. Для проекта onoff_switch_ota_client_onchip
    1. Upgrade Mode - Set to Overwrite mode.
    2. Bootloader Configurations - Base: ```0x00000000```, Size: ```0x00004000```
    3. Image 1 -> Primary Image - Base Address: ```0x00004000```, Image Size: ```0x0003D800```
    4. Image 1 -> Secondary Image - Base Address: ```0x00041800```, Image Size: ```0x0003D800```
 ![](/images/2025-07-07_192122.png)
-#### 2. Для примера onoff_switch_ota_client_offchip
+#### 2. Для проекта onoff_switch_ota_client_offchip
    1. Upgrade Mode - Set to Overwrite mode.
    2. Enable External Flash - Check this box.
    3. Bootloader Configurations - Base: ```0x00000000```, Size: ```0x00004000```
