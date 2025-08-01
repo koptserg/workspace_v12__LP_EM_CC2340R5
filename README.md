@@ -43,13 +43,13 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
   ![](/images/2025-07-07_190522.png)
 
 ### Настраиваем конфиг mcuboot.syscfg
-#### 1. Для примера onoff_switch_ota_client_onchip
+#### 1. Для проекта onoff_switch_ota_client_onchip
    1. Upgrade Mode - Set to Overwrite mode.
    2. Bootloader Configurations - Base: ```0x00000000```, Size: ```0x00004000```
    3. Image 1 -> Primary Image - Base Address: ```0x00004000```, Image Size: ```0x0003D800```
    4. Image 1 -> Secondary Image - Base Address: ```0x00041800```, Image Size: ```0x0003D800```
 ![](/images/2025-07-07_192122.png)
-#### 2. Для примера onoff_switch_ota_client_offchip
+#### 2. Для проекта onoff_switch_ota_client_offchip
    1. Upgrade Mode - Set to Overwrite mode.
    2. Enable External Flash - Check this box.
    3. Bootloader Configurations - Base: ```0x00000000```, Size: ```0x00004000```
@@ -57,9 +57,11 @@ C:\ti\simplelink_lowpower_f3_sdk_8_40_02_01\examples\rtos\LP_EM_CC2340R5\zigbee\
    5. Image 1 -> Secondary Image - Base Address: ```0x00000000```, Image Size: ```0x00070000```
 ![](/images/2025-07-07_193615.png)
 ### Собираем проект mcuboot
+будет создан файл прошивки 
+```ruby
+C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex
+```
 ![](/images/2025-07-07_194940.png)
-### Прошиваем проект mcuboot
-![](/images/2025-07-07_195339.png)
 ### Правки в поекте onoff_switch_ota_client_onchip
 #### 1.Настраиваем конфиг on_off_switch_ota_client_onchip.syscfg
   ![](/images/2025-07-07_211623.png)
@@ -137,20 +139,35 @@ ZB_HA_DECLARE_ON_OFF_SWITCH_OTA_CTX(on_off_switch_ctx, on_off_switch_ep);
   strcpy(g_dev_ctx.basic_attr.model_id + 1, "DIYRuZ_SW2340R5");
 ```
   ![](/images/2025-07-07_202656.png)
-#### 6. Собираем проект onoff_switch_ota_client_onchip  
+#### 6. Собираем проект onoff_switch_ota_client_onchip
+будет создан файл прошивки 
+```ruby
+C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
+```
+и файл образа .zigbee для OTA
+```ruby
+C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\BEBE-2340-00000002.zigbee
+```
   ![](/images/2025-07-07_205148.png)
-#### 7. Прошиваем проект onoff_switch_ota_client_onchip 
-  ![](/images/2025-07-07_210751.png)
-#### 8. Для старта на девборде LP-EM-CC2340R5 давим кнопку Reset
-### Правки в поекте onoff_switch_ota_client_offchip
-  Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
 ### Прошивка с помощью UniFlash 9.2.0 проектов mcuboot и onoff_switch_ota_client_onchip
 ```ruby
 C:\Users\Sergey\workspace_v12\mcuboot_LP_EM_CC2340R5_nortos_ticlang\Debug\mcuboot_LP_EM_CC2340R5_nortos_ticlang.hex
 C:\Users\Sergey\workspace_v12\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang\Debug\onoff_switch_ota_client_onchip_LP_EM_CC2340R5_freertos_ticlang_ota.bin
 ```
    ![](/images/2025-07-08_104419.png)
-### Отладка проекта onoff_switch_ota_client_onchip с выводом Log_printf() в ROV(Runtime Object View)
+### Правки в поекте onoff_switch_ota_client_offchip
+  Нужно повторить все шаги как на правке проекта onoff_switch_ota_client_onchip
+## Управление устройством
+#### Добавить устройство в сеть
+   1. Коротко нажать кнопку сброс или сбросить по питанию.
+   2. Дождаться добавление в сеть.
+#### Удалить устройство из сети (perform factory reset) 
+   1. Нажать и удерживать кнопку BTN-1(BTN-2).
+   2. Коротко нажать кнопку сброс или сбросить по питанию.
+   3. Дождаться выхода из сети, затем отпустить кнопку BTN-1(BTN-2).
+#### Отправить команду переключения Send On/Off Toggle
+   1. Коротко нажать кнопку BTN-1.
+## Отладка проекта onoff_switch_ota_client_onchip с выводом Log_printf() в ROV(Runtime Object View)
 #### 1. Добавим в File Search Path библиотеку
 ```ruby
 ${COM_TI_SIMPLELINK_LOWPOWER_F3_SDK_INSTALL_DIR}/source/ti/log/lib/ticlang/m0p/log_cc23x0r5.a
