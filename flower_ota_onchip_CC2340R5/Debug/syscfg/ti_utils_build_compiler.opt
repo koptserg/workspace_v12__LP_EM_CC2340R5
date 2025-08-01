@@ -1,0 +1,5 @@
+-DZB_ED_ROLE
+-DZB_CONFIG_ROLE_ZED
+-DDeviceFamily_CC23X0R5
+-Dti_log_Log_ENABLE_LogModule_Zigbee_App=1
+-Dti_log_Log_ENABLE

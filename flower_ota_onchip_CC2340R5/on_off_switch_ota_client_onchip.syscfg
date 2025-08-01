@@ -1,0 +1,74 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5RKP" --part "Default" --package "RKP" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @v2CliArgs --board "/ti/boards/LP_EM_CC2340R5" --device "CC2340R5" --package "VQFN (RKP)" --variant "CC2340R52" --rtos "freertos" --product "simplelink_lowpower_f3_sdk@8.40.02.01"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const FreeRTOS = scripting.addModule("/freertos/FreeRTOS");
+const CCFG     = scripting.addModule("/ti/devices/CCFG");
+const rfdesign = scripting.addModule("/ti/devices/radioconfig/rfdesign");
+const GPIO     = scripting.addModule("/ti/drivers/GPIO");
+const GPIO1    = GPIO.addInstance();
+const GPIO2    = GPIO.addInstance();
+const GPIO3    = GPIO.addInstance();
+const GPIO4    = GPIO.addInstance();
+const Settings = scripting.addModule("/ti/posix/freertos/Settings");
+const zigbee   = scripting.addModule("/ti/zigbee/zigbee");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+FreeRTOS.heapSize       = 0x00001BBC;
+FreeRTOS.idleStackSize  = 0x00000100;
+FreeRTOS.timerStackSize = 0x00000100;
+
+CCFG.ccfgTemplate.$name = "ti_devices_CCFG_CCFGCC23X0Template0";
+
+GPIO1.$hardware = system.deviceData.board.components.LED_GREEN;
+GPIO1.$name     = "CONFIG_GPIO_GLED";
+
+GPIO2.$hardware = system.deviceData.board.components.LED_RED;
+GPIO2.$name     = "CONFIG_GPIO_RLED";
+
+GPIO3.$hardware        = system.deviceData.board.components["BTN-1"];
+GPIO3.$name            = "CONFIG_GPIO_BTN1";
+GPIO3.pull             = "Pull Up";
+GPIO3.interruptTrigger = "Falling Edge";
+
+GPIO4.$hardware        = system.deviceData.board.components["BTN-2"];
+GPIO4.$name            = "CONFIG_GPIO_BTN2";
+GPIO4.pull             = "Pull Up";
+GPIO4.interruptTrigger = "Falling Edge";
+
+zigbee.primaryChannels                   = [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
+zigbee.deviceType                        = ["zed"];
+zigbee.loggingEnabled                    = true;
+zigbee.LogModuleZigbeeLLMAC.enableModule = false;
+zigbee.LogModuleZigbeeApp.enable_INFO    = true;
+zigbee.LogModuleZigbeeApp.enable_VERBOSE = true;
+zigbee.LogModuleZigbeeApp.enable_DEBUG   = true;
+
+const RNG       = scripting.addModule("/ti/drivers/RNG", {}, false);
+RNG.rngPoolSize = 512;
+scripting.suppress("This the default noise conditioning key provided by TI, which is acceptable per NIST SP 800-90B\\. However, TI recommends you change this default value to a custom random value for your product", RNG, "noiseConditioningKeyW3");
+
+const LogSinkBuf                   = scripting.addModule("/ti/log/LogSinkBuf", {}, false);
+const LogSinkBuf1                  = LogSinkBuf.addInstance({}, false);
+LogSinkBuf1.$name                  = "CONFIG_ti_log_LogSinkBuf_0";
+zigbee.LogModuleZigbeeLLMAC.logger = LogSinkBuf1;
+zigbee.LogModuleZigbeeApp.logger   = LogSinkBuf1;
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.gpioPin.$suggestSolution = "boosterpack.40";
+GPIO2.gpioPin.$suggestSolution = "boosterpack.39";
+GPIO3.gpioPin.$suggestSolution = "boosterpack.13";
+GPIO4.gpioPin.$suggestSolution = "boosterpack.12";
