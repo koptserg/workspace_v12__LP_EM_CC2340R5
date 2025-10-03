@@ -159,6 +159,7 @@ on_off_switch_ota_client.o: ../on_off_switch_ota_client.c \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zcl/zb_zcl_grpw_freq_agility.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag_init.h \
+ C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h \
  syscfg/ti_zigbee_config.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_led_button.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_fcfg.h \
@@ -169,6 +170,14 @@ on_off_switch_ota_client.o: ../on_off_switch_ota_client.c \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/gpio/GPIOLPF3.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_ioc.h \
  syscfg/ti_drivers_config.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/BatteryMonitor.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/PWM.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/ADC.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/adc/ADCLPF3.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/driverlib/adc.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_adc.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_fcfg.h \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_sys0.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/zigbee/include/zb_mem_config_lprf3.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/zigbee/include/zb_src_matching.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_mem_config_common.h \
@@ -490,6 +499,8 @@ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag_init.h:
 
+C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h:
+
 syscfg/ti_zigbee_config.h:
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_led_button.h:
@@ -509,6 +520,22 @@ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/gpio/GPIOLPF3.h:
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_ioc.h:
 
 syscfg/ti_drivers_config.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/BatteryMonitor.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/PWM.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/ADC.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/adc/ADCLPF3.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/driverlib/adc.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_adc.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_fcfg.h:
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_sys0.h:
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/zigbee/include/zb_mem_config_lprf3.h:
 

@@ -2,7 +2,7 @@ from datetime import datetime
 from os.path import dirname, join
 cwd = dirname(__file__)
 now = datetime.now()
-dt_string = now.strftime("%d/%m/%Y %H:%M")
+dt_string = now.strftime("%d.%m.%y %H:%M")
 print("date and time =", dt_string)
 with open(join(cwd, './version.c'), 'w') as f:
     chars = ["'{0}'".format(char) for char in dt_string]
@@ -17,7 +17,7 @@ with open(join(cwd, './version.c'), 'w') as f:
     """
     )
     f.write('#include "version.h"\n')
-    code = """const char app_version[] = \"{0}\";\n""".format(dt_string)
+    code = """const char date_code[] = \"{0}\";\n""".format(dt_string)
     f.write(code)
     f.write("""
     #ifdef __cplusplus

@@ -18,6 +18,55 @@
 #include "ti_drivers_config.h"
 
 /*
+ *  =============================== ADC ===============================
+ */
+
+#include <ti/drivers/ADC.h>
+#include <ti/drivers/adc/ADCLPF3.h>
+#include <ti/drivers/GPIO.h>
+
+#define CONFIG_ADC_COUNT 1
+
+/*
+ *  ======== ADCLPF3_objects ========
+ */
+ADCLPF3_Object ADCLPF3_objects[CONFIG_ADC_COUNT];
+
+/*
+ *  ======== ADCLPF3_hwAttrs ========
+ */
+const ADCLPF3_HWAttrs ADCLPF3_hwAttrs[CONFIG_ADC_COUNT] = {
+    /* CONFIG_ADC_0 */
+    {
+        .adcInputDIO         = CONFIG_GPIO_ADC_0_CHANNEL,
+        .adcRefPosDIO        = GPIO_INVALID_INDEX,
+        .adcRefNegDIO        = GPIO_INVALID_INDEX,
+        .internalChannel     = 0,
+        .refSource           = ADCLPF3_VDDS_REFERENCE,
+        .samplingDuration    = 16,
+        .refVoltage          = 3300000,
+        .returnAdjustedVal   = false,
+        .resolutionBits      = ADCLPF3_RESOLUTION_12_BIT,
+        .adcClkkDivider      = ADCLPF3_CLKDIV_8
+    },
+};
+
+/*
+ *  ======== ADC_config ========
+ */
+const ADC_Config ADC_config[CONFIG_ADC_COUNT] = {
+    /* CONFIG_ADC_0 */
+    {
+        .fxnTablePtr    = &ADCLPF3_fxnTable,
+        .object         = &ADCLPF3_objects[CONFIG_ADC_0],
+        .hwAttrs        = &ADCLPF3_hwAttrs[CONFIG_ADC_0]
+    },
+};
+
+const uint_least8_t CONFIG_ADC_0_CONST = CONFIG_ADC_0;
+const uint_least8_t ADC_count = CONFIG_ADC_COUNT;
+
+/*
  *  =============================== AESCCM ===============================
  */
 
@@ -137,7 +186,8 @@ GPIO_PinConfig gpioPinConfigs[26] = {
     GPIO_CFG_NO_DIR, /* DIO_4 */
     GPIO_CFG_NO_DIR, /* DIO_5 */
     GPIO_CFG_NO_DIR, /* DIO_6 */
-    GPIO_CFG_NO_DIR, /* DIO_7 */
+    /* Owned by CONFIG_ADC_0_CHANNEL as ADC_0_CHANNEL */
+    GPIO_CFG_INPUT_INTERNAL | GPIO_CFG_IN_INT_NONE | GPIO_CFG_PULL_NONE_INTERNAL, /* CONFIG_GPIO_ADC_0_CHANNEL */
     GPIO_CFG_NO_DIR, /* DIO_8 */
     GPIO_CFG_INPUT_INTERNAL | GPIO_CFG_IN_INT_FALLING | GPIO_CFG_PULL_UP_INTERNAL, /* CONFIG_GPIO_BTN2 */
     GPIO_CFG_INPUT_INTERNAL | GPIO_CFG_IN_INT_FALLING | GPIO_CFG_PULL_UP_INTERNAL, /* CONFIG_GPIO_BTN1 */
@@ -154,7 +204,8 @@ GPIO_PinConfig gpioPinConfigs[26] = {
     GPIO_CFG_NO_DIR, /* DIO_21 */
     GPIO_CFG_NO_DIR, /* DIO_22 */
     GPIO_CFG_NO_DIR, /* DIO_23 */
-    GPIO_CFG_NO_DIR, /* DIO_24 */
+    /* Owned by CONFIG_LGPTIMER_0 as CH0 */
+    GPIO_CFG_OUTPUT_INTERNAL | GPIO_CFG_OUT_STR_MED | GPIO_CFG_OUT_LOW, /* CONFIG_GPIO_LGPTIMER_0_CH0 */
     GPIO_CFG_NO_DIR, /* DIO_25 */
 };
 
@@ -173,10 +224,12 @@ GPIO_CallbackFxn gpioCallbackFunctions[26];
  */
 void* gpioUserArgs[26];
 
+const uint_least8_t CONFIG_GPIO_ADC_0_CHANNEL_CONST = CONFIG_GPIO_ADC_0_CHANNEL;
 const uint_least8_t CONFIG_GPIO_GLED_CONST = CONFIG_GPIO_GLED;
 const uint_least8_t CONFIG_GPIO_RLED_CONST = CONFIG_GPIO_RLED;
 const uint_least8_t CONFIG_GPIO_BTN1_CONST = CONFIG_GPIO_BTN1;
 const uint_least8_t CONFIG_GPIO_BTN2_CONST = CONFIG_GPIO_BTN2;
+const uint_least8_t CONFIG_GPIO_LGPTIMER_0_CH0_CONST = CONFIG_GPIO_LGPTIMER_0_CH0;
 
 /*
  *  ======== GPIO_config ========
@@ -187,6 +240,66 @@ const GPIO_Config GPIO_config = {
     .userArgs = gpioUserArgs,
     .intPriority = (~0)
 };
+
+/*
+ *  =============== LGPTimer ===============
+ */
+
+#include <ti/drivers/timer/LGPTimerLPF3.h>
+#include <ti/drivers/Power.h>
+#include <ti/drivers/GPIO.h>
+#include <ti/devices/cc23x0r5/inc/hw_memmap.h>
+#include <ti/devices/cc23x0r5/inc/hw_ints.h>
+
+#define CONFIG_LGPTIMER_COUNT 1
+
+/*
+ *  ======== LGPTimerLPF3_objects ========
+ */
+LGPTimerLPF3_Object LGPTimerLPF3_objects[CONFIG_LGPTIMER_COUNT];
+
+/*
+ *  ======== LGPTimerLPF3_hwAttrs ========
+ */
+static const LGPTimerLPF3_HWAttrs LGPTimerLPF3_hwAttrs[CONFIG_LGPTIMER_COUNT] = {
+  {
+    .baseAddr           = LGPT1_BASE,
+    .intNum             = INT_LGPT1_COMB,
+    .intPriority        = (~0),
+    .powerID            = PowerLPF3_PERIPH_LGPT1,
+    .channelConfig[0]   = {
+        .pin     = CONFIG_GPIO_LGPTIMER_0_CH0,
+        .pinMux  = GPIO_MUX_PORTCFG_PFUNC2,
+        .nPin    = GPIO_INVALID_INDEX,
+        .nPinMux = GPIO_MUX_GPIO_INTERNAL,
+    },
+    .channelConfig[1]   = {
+        .pin     = GPIO_INVALID_INDEX,
+        .pinMux  = GPIO_MUX_GPIO_INTERNAL,
+        .nPin    = GPIO_INVALID_INDEX,
+        .nPinMux = GPIO_MUX_GPIO_INTERNAL,
+    },
+    .channelConfig[2]   = {
+        .pin     = GPIO_INVALID_INDEX,
+        .pinMux  = GPIO_MUX_GPIO_INTERNAL,
+        .nPin    = GPIO_INVALID_INDEX,
+        .nPinMux = GPIO_MUX_GPIO_INTERNAL,
+    },
+  },
+};
+
+/*
+ *  ======== LGPTimer_config ========
+ */
+const LGPTimerLPF3_Config LGPTimerLPF3_config[CONFIG_LGPTIMER_COUNT] = {
+    {   /* CONFIG_LGPTIMER_0 */
+        .object      = &LGPTimerLPF3_objects[CONFIG_LGPTIMER_0],
+        .hwAttrs     = &LGPTimerLPF3_hwAttrs[CONFIG_LGPTIMER_0]
+    },
+};
+
+const uint_least8_t CONFIG_LGPTIMER_0_CONST = CONFIG_LGPTIMER_0;
+const uint_least8_t LGPTimerLPF3_count = CONFIG_LGPTIMER_COUNT;
 
 /*
  *  =============================== NVS ===============================
@@ -249,6 +362,50 @@ const NVS_Config NVS_config[CONFIG_NVS_COUNT] = {
 
 const uint_least8_t CONFIG_NVSINTERNAL_ZB_CONST = CONFIG_NVSINTERNAL_ZB;
 const uint_least8_t NVS_count = CONFIG_NVS_COUNT;
+
+/*
+ *  =============================== PWM ===============================
+ */
+
+#include <ti/drivers/PWM.h>
+#include <ti/drivers/pwm/PWMTimerLPF3.h>
+
+/* include driverlib definitions */
+#include <ti/devices/cc23x0r5/inc/hw_ints.h>
+#include <ti/devices/cc23x0r5/inc/hw_memmap.h>
+
+#define CONFIG_PWM_COUNT 1
+
+/*
+ *  ======== PWMTimerLPF3_objects ========
+ */
+PWMTimerLPF3_Object PWMTimerLPF3_objects[CONFIG_PWM_COUNT];
+
+/*
+ *  ======== PWMTimerLPF3_hwAttrs ========
+ */
+const PWMTimerLPF3_HwAttrs PWMTimerLPF3_hwAttrs[CONFIG_PWM_COUNT] = {
+    /* CONFIG_PWM_0 */
+    {
+        .lgpTimerInstance = CONFIG_LGPTIMER_0,
+        .preScalerDivision = 1
+    },
+};
+
+/*
+ *  ======== PWM_config ========
+ */
+const PWM_Config PWM_config[CONFIG_PWM_COUNT] = {
+    /* CONFIG_PWM_0 */
+    {
+        .fxnTablePtr = &PWMTimerLPF3_fxnTable,
+        .object = &PWMTimerLPF3_objects[CONFIG_PWM_0],
+        .hwAttrs = &PWMTimerLPF3_hwAttrs[CONFIG_PWM_0]
+    },
+};
+
+const uint_least8_t CONFIG_PWM_0_CONST = CONFIG_PWM_0;
+const uint_least8_t PWM_count = CONFIG_PWM_COUNT;
 
 /*
  *  =============================== Power ===============================

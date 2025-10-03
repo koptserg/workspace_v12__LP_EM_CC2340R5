@@ -43,10 +43,16 @@
 #define ON_OFF_SWITCH_OTA_H 1
 
 #include "zboss_api.h"
+#include "zb_zcl_soil_moisture_measurement.h"
 
 #define ZB_SWITCH_ENDPOINT          10
 #define ZB_OTA_ENDPOINT             11
-#define ZB_CUSTOM_ENDPOINT          12
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
+#define AIR_COMPENSATION_FORMULA(ADC)   ((154 * ADC + 1953000))
+#define WATER_COMPENSATION_FORMULA(ADC) ((130 * ADC + 800000))
 
 /* OTA Manufacturer code */
 #define DL_DEVICE_MANUFACTURER_CODE  0x1234
@@ -75,33 +81,6 @@
 #define DL_OTA_UPGRADE_HASH_LENGTH              16
 #define DL_OTA_DEVICE_RESET_TIMEOUT             30*ZB_TIME_ONE_SECOND
 
-/* Custom cluster*/
-#define ZB_ZCL_CLUSTER_ID_CUSTOM_DIYRUZ        0xFFF0
-
-//void zb_zcl_identify_init_server(void);
-//void zb_zcl_identify_init_client(void);
-#define ZB_ZCL_CLUSTER_ID_CUSTOM_DIYRUZ_SERVER_ROLE_INIT zb_zcl_identify_init_server
-#define ZB_ZCL_CLUSTER_ID_CUSTOM_DIYRUZ_CLIENT_ROLE_INIT zb_zcl_identify_init_client
-
-enum zb_zcl_custom_attr_e
-{
-    ZB_ZCL_ATTR_CUSTOM_DIYRUZ_VALUE = 0xF000
-};
-
-#define ZB_SET_ATTR_DESCR_WITH_ZB_ZCL_ATTR_CUSTOM_DIYRUZ_VALUE(data_ptr)  \
-{                                                                               \
-  ZB_ZCL_ATTR_CUSTOM_DIYRUZ_VALUE,                                        \
-  ZB_ZCL_ATTR_TYPE_U16,                                                         \
-  ZB_ZCL_ATTR_ACCESS_READ_ONLY | ZB_ZCL_ATTR_ACCESS_REPORTING,                                                \
-  (ZB_ZCL_NON_MANUFACTURER_SPECIFIC),                                           \
-  (void*) data_ptr                                                              \
-}
-
-#define ZB_ZCL_DECLARE_CUSTOM_DIYRUZ_ATTRIB_LIST(attr_list, value)   \
-  ZB_ZCL_START_DECLARE_ATTRIB_LIST_CLUSTER_REVISION(attr_list, ZB_ZCL_IDENTIFY) \
-  ZB_ZCL_SET_ATTR_DESC(ZB_ZCL_ATTR_CUSTOM_DIYRUZ_VALUE, (value)) \
-  ZB_ZCL_FINISH_DECLARE_ATTRIB_LIST
-
 /*!
   @brief Declare HA cluster list for On Off Switch OTA Device
   @param cluster_list_name - cluster list variable name
@@ -114,8 +93,10 @@ enum zb_zcl_custom_attr_e
 #define ZB_HA_DECLARE_ON_OFF_SWITCH_1_CLUSTER_LIST(                   \
   cluster_list_name_1,                                                    \
   on_off_switch_config_attr_list,                                       \
-  basic_attr_list                                                      \
-/*  identify_attr_list */                                                    \
+  basic_attr_list,                                                      \
+  identify_attr_list,                                                     \
+  battery_attr_list,                                      \
+  soil_moisure_attr_list                                  \
 )                                                                       \
   zb_zcl_cluster_desc_t cluster_list_name_1[] =                           \
 {                                                                       \
@@ -140,13 +121,27 @@ enum zb_zcl_custom_attr_e
     ZB_ZCL_CLUSTER_SERVER_ROLE,                                         \
     ZB_ZCL_MANUF_CODE_INVALID                                           \
   ),                                                                    \
-/*  ZB_ZCL_CLUSTER_DESC( */                                                 \
-/*    ZB_ZCL_CLUSTER_ID_IDENTIFY, */                                        \
-/*    ZB_ZCL_ARRAY_SIZE(identify_attr_list, zb_zcl_attr_t),*/               \
-/*    (identify_attr_list), */                                              \
-/*    ZB_ZCL_CLUSTER_SERVER_ROLE, */                                        \
-/*    ZB_ZCL_MANUF_CODE_INVALID */                                          \
-/*  ), */                                                                   \
+  ZB_ZCL_CLUSTER_DESC(                                                  \
+    ZB_ZCL_CLUSTER_ID_IDENTIFY,                                         \
+    ZB_ZCL_ARRAY_SIZE(identify_attr_list, zb_zcl_attr_t),               \
+    (identify_attr_list),                                               \
+    ZB_ZCL_CLUSTER_SERVER_ROLE,                                         \
+    ZB_ZCL_MANUF_CODE_INVALID                                           \
+  ),                                                                    \
+  ZB_ZCL_CLUSTER_DESC(                                        \
+    ZB_ZCL_CLUSTER_ID_POWER_CONFIG,                           \
+    ZB_ZCL_ARRAY_SIZE(battery_attr_list, zb_zcl_attr_t),      \
+    (battery_attr_list),                                      \
+    ZB_ZCL_CLUSTER_SERVER_ROLE,                               \
+    ZB_ZCL_MANUF_CODE_INVALID                                 \
+  ),                                                          \
+  ZB_ZCL_CLUSTER_DESC(                                        \
+    ZB_ZCL_CLUSTER_ID_SOIL_MOISTURE_MEASUREMENT,              \
+    ZB_ZCL_ARRAY_SIZE(soil_moisure_attr_list, zb_zcl_attr_t),      \
+    (soil_moisure_attr_list),                                      \
+    ZB_ZCL_CLUSTER_SERVER_ROLE,                               \
+    ZB_ZCL_MANUF_CODE_INVALID                                 \
+  ),                                                          \
   ZB_ZCL_CLUSTER_DESC(                                                  \
     ZB_ZCL_CLUSTER_ID_ON_OFF,                                           \
     0,                                                                  \
@@ -161,13 +156,13 @@ enum zb_zcl_custom_attr_e
     ZB_ZCL_CLUSTER_CLIENT_ROLE,                                         \
     ZB_ZCL_MANUF_CODE_INVALID                                           \
   ),                                                                    \
-/*  ZB_ZCL_CLUSTER_DESC( */                                                 \
-/*    ZB_ZCL_CLUSTER_ID_IDENTIFY, */                                        \
-/*    0, */                                                                 \
-/*    NULL, */                                                              \
-/*    ZB_ZCL_CLUSTER_CLIENT_ROLE, */                                        \
-/*    ZB_ZCL_MANUF_CODE_INVALID */                                          \
-/*  ), */                                                                   \
+  ZB_ZCL_CLUSTER_DESC(                                                  \
+    ZB_ZCL_CLUSTER_ID_IDENTIFY,                                         \
+    0,                                                                  \
+    NULL,                                                               \
+    ZB_ZCL_CLUSTER_CLIENT_ROLE,                                         \
+    ZB_ZCL_MANUF_CODE_INVALID                                           \
+  ),                                                                    \
   ZB_ZCL_CLUSTER_DESC(                                                  \
     ZB_ZCL_CLUSTER_ID_GROUPS,                                           \
     0,                                                                  \
@@ -199,21 +194,6 @@ enum zb_zcl_custom_attr_e
   ),                                                                    \
 }
 
-#define ZB_HA_DECLARE_ON_OFF_SWITCH_3_CLUSTER_LIST(                   \
-  cluster_list_name_3,                                                    \
-  custom_attr_list                                                      \
-)                                                                       \
-  zb_zcl_cluster_desc_t cluster_list_name_3[] =                           \
-{                                                                       \
-  ZB_ZCL_CLUSTER_DESC(                                                  \
-    ZB_ZCL_CLUSTER_ID_CUSTOM_DIYRUZ,                                      \
-    ZB_ZCL_ARRAY_SIZE(custom_attr_list, zb_zcl_attr_t),            \
-    (custom_attr_list),                                            \
-    ZB_ZCL_CLUSTER_SERVER_ROLE,                                         \
-    ZB_ZCL_MANUF_CODE_INVALID                                           \
-  ),                                                                    \
-}
-
 #define ZB_ZCL_DECLARE_ON_OFF_SWITCH_1_SIMPLE_DESC(ep_name, ep_id, in_clust_num, out_clust_num) \
   ZB_DECLARE_SIMPLE_DESC(in_clust_num, out_clust_num);                                        \
   ZB_AF_SIMPLE_DESC_TYPE(in_clust_num, out_clust_num) simple_desc_##ep_name =                 \
@@ -227,17 +207,19 @@ enum zb_zcl_custom_attr_e
     out_clust_num,                                                                            \
     {                                                                                         \
       ZB_ZCL_CLUSTER_ID_BASIC,                                                                \
-/*      ZB_ZCL_CLUSTER_ID_IDENTIFY, */                                                            \
+      ZB_ZCL_CLUSTER_ID_IDENTIFY,                                                             \
       ZB_ZCL_CLUSTER_ID_ON_OFF_SWITCH_CONFIG,                                                 \
+      ZB_ZCL_CLUSTER_ID_POWER_CONFIG,                                       \
+      ZB_ZCL_CLUSTER_ID_SOIL_MOISTURE_MEASUREMENT,                                       \
       ZB_ZCL_CLUSTER_ID_ON_OFF,                                                               \
       ZB_ZCL_CLUSTER_ID_SCENES,                                                               \
       ZB_ZCL_CLUSTER_ID_GROUPS,                                         \
-/*      ZB_ZCL_CLUSTER_ID_IDENTIFY, */                                      \
+      ZB_ZCL_CLUSTER_ID_IDENTIFY,                                       \
     }                                                                                         \
   }
 
-#define ZB_HA_ON_OFF_SWITCH_1_IN_CLUSTER_NUM 2  /*!< On/Off switch IN clusters number */
-#define ZB_HA_ON_OFF_SWITCH_1_OUT_CLUSTER_NUM 3 /*!< On/Off switch OUT clusters number */
+#define ZB_HA_ON_OFF_SWITCH_1_IN_CLUSTER_NUM 5  /*!< On/Off switch IN clusters number */
+#define ZB_HA_ON_OFF_SWITCH_1_OUT_CLUSTER_NUM 4 /*!< On/Off switch OUT clusters number */
 #define ZB_HA_DECLARE_ON_OFF_SWITCH_1_EP(ep_name, ep_id, cluster_list) \
   ZB_ZCL_DECLARE_ON_OFF_SWITCH_1_SIMPLE_DESC(                          \
       ep_name,                                                       \
@@ -290,40 +272,16 @@ enum zb_zcl_custom_attr_e
       0, NULL, /* No reporting ctx */           \
       0, NULL) /* No CVC ctx */
 
-#define ZB_ZCL_DECLARE_ON_OFF_SWITCH_3_SIMPLE_DESC(ep_name, ep_id, in_clust_num, out_clust_num) \
-  ZB_DECLARE_SIMPLE_DESC(in_clust_num, out_clust_num);                                        \
-  ZB_AF_SIMPLE_DESC_TYPE(in_clust_num, out_clust_num) simple_desc_##ep_name =                 \
-  {                                                                                           \
-    ep_id,                                                                                    \
-    ZB_AF_HA_PROFILE_ID,                                                                      \
-    ZB_HA_ON_OFF_SWITCH_DEVICE_ID,                                                            \
-    ZB_HA_DEVICE_VER_ON_OFF_SWITCH,                                                           \
-    0,                                                                                        \
-    in_clust_num,                                                                             \
-    out_clust_num,                                                                            \
-    {                                                                                         \
-      ZB_ZCL_CLUSTER_ID_CUSTOM_DIYRUZ,                                       \
-    }                                                                                         \
-  }
-
-#define ZB_HA_ON_OFF_SWITCH_3_IN_CLUSTER_NUM 1  /*!< On/Off switch IN clusters number */
-#define ZB_HA_ON_OFF_SWITCH_3_OUT_CLUSTER_NUM 0 /*!< On/Off switch OUT clusters number */
-#define ZB_HA_DECLARE_ON_OFF_SWITCH_3_EP(ep_name, ep_id, cluster_list) \
-  ZB_ZCL_DECLARE_ON_OFF_SWITCH_3_SIMPLE_DESC(                          \
-      ep_name,                                                       \
-      ep_id,                                                         \
-      ZB_HA_ON_OFF_SWITCH_3_IN_CLUSTER_NUM,                            \
-      ZB_HA_ON_OFF_SWITCH_3_OUT_CLUSTER_NUM);                          \
-  ZB_AF_DECLARE_ENDPOINT_DESC(ep_name,                                  \
-                              ep_id,                                    \
-      ZB_AF_HA_PROFILE_ID,                                           \
-      0,                                                             \
-      NULL,                                                          \
-      ZB_ZCL_ARRAY_SIZE(cluster_list, zb_zcl_cluster_desc_t),        \
-      cluster_list,                                                  \
-      (zb_af_simple_desc_1_1_t*)&simple_desc_##ep_name, \
-      0, NULL, /* No reporting ctx */           \
-      0, NULL) /* No CVC ctx */
+#define ZB_ZCL_DECLARE_POWER_CONFIG_BATTERY_NULL_ATTRIB_LIST_EXT(attr_list,                      \
+    voltage, size, quantity, rated_voltage, alarm_mask, voltage_min_threshold,              \
+    remaining, threshold1, threshold2, threshold3, min_threshold, percent_threshold1,       \
+    percent_threshold2, percent_threshold3, alarm_state)                                    \
+  ZB_ZCL_START_DECLARE_ATTRIB_LIST_CLUSTER_REVISION(attr_list, ZB_ZCL_POWER_CONFIG)         \
+  ZB_ZCL_POWER_CONFIG_BATTERY_ATTRIB_LIST_EXT( ,                                      \
+    voltage, size, quantity, rated_voltage, alarm_mask, voltage_min_threshold,              \
+    remaining, threshold1, threshold2, threshold3, min_threshold, percent_threshold1,       \
+    percent_threshold2, percent_threshold3, alarm_state)                                    \
+  ZB_ZCL_FINISH_DECLARE_ATTRIB_LIST
 
 /* attributes of Basic cluster */
 typedef struct device_basic_attr_s
@@ -334,20 +292,19 @@ typedef struct device_basic_attr_s
   zb_uint8_t hw_version;
   zb_char_t mf_name[32];
   zb_char_t model_id[32];
-  zb_char_t date_code[16];
+  zb_char_t date_code[32];
   zb_uint8_t power_source;
   zb_char_t location_id[5];
   zb_uint8_t ph_env;
-  zb_char_t sw_build_id[16];
+  zb_char_t sw_build_id[32];
 } device_basic_attr_t;
 
 /* attributes of Identify cluster */
-/*
 typedef struct device_identify_attr_s
 {
   zb_uint16_t identify_time;
 } device_identify_attr_t;
-*/
+
 /* OTA Upgrade client cluster attributes data */
 typedef struct device_ota_attr_s
 {
@@ -400,19 +357,41 @@ typedef struct on_off_switch_attr_s
   zb_uint8_t attr_switch_actions;
 } on_off_switch_attr_t;
 
-typedef struct zb_zcl_custom_attr_s
+typedef struct device_battery_attr_s
 {
-  zb_uint16_t custom_value;
-} zb_zcl_custom_attr_t;
+  zb_uint8_t voltage;
+  zb_uint8_t size;
+  zb_uint8_t quantity;
+  zb_uint8_t rated_voltage;
+  zb_uint8_t alarm_mask;
+  zb_uint8_t voltage_min_threshold;
+  zb_uint8_t remaining;
+  zb_uint8_t threshold1;
+  zb_uint8_t threshold2;
+  zb_uint8_t threshold3;
+  zb_uint8_t min_threshold;
+  zb_uint8_t percent_threshold1;
+  zb_uint8_t percent_threshold2;
+  zb_uint8_t percent_threshold3;
+  zb_uint32_t alarm_state;
+} device_battery_attr_t;
+
+typedef struct device_soil_moisure_attr_s
+{
+  zb_uint16_t value;
+  zb_uint16_t min_value;
+  zb_uint16_t max_value;
+} device_soil_moisure_attr_t;
 
 typedef struct on_off_switch_ota_ctx_s
 {
   on_off_switch_attr_t on_off_sw_attr;
   device_basic_attr_t basic_attr;
-//  device_identify_attr_t identify_attr;
+  device_battery_attr_t battery_attr;
+  device_soil_moisure_attr_t soil_moisure_attr;
+  device_identify_attr_t identify_attr;
   device_ota_attr_t ota_attr;
   ota_upgrade_ctx_t ota_ctx;
-  zb_zcl_custom_attr_t custom_attr;
 } on_off_switch_ota_ctx_t;
 
 extern on_off_switch_ota_ctx_t g_dev_ctx;
@@ -421,5 +400,7 @@ extern on_off_switch_ota_ctx_t g_dev_ctx;
 void dl_process_ota_upgrade_cb(zb_uint8_t param);
 void dl_ota_start_upgrade(zb_uint8_t param);
 
+extern zb_uint8_t button_number;
+extern zb_bool_t button_state;
 
 #endif /* ON_OFF_SWITCH_OTA_H */

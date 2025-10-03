@@ -157,6 +157,7 @@ ota_client_interface.o: ../ota_client_interface.c \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag_init.h \
  C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/on_off_switch_ota_client.h \
+ C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/zigbee/osif/include/zb_osif_ota.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/log/Log.h
 
@@ -471,6 +472,8 @@ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_diag_init.h:
 
 C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/on_off_switch_ota_client.h:
+
+C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h:
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/zigbee/osif/include/zb_osif_ota.h:
 

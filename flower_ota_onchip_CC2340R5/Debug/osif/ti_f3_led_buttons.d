@@ -1,6 +1,7 @@
 # FIXED
 
 osif/ti_f3_led_buttons.o: ../osif/ti_f3_led_buttons.c \
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/log/Log.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_common.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_config.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_vendor.h \
@@ -200,7 +201,11 @@ osif/ti_f3_led_buttons.o: ../osif/ti_f3_led_buttons.c \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/drivers/gpio/GPIOLPF3.h \
  C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_ioc.h \
  syscfg/ti_drivers_config.h \
- C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/driverlib/cpu.h
+ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/driverlib/cpu.h \
+ C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/on_off_switch_ota_client.h \
+ C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h
+
+C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/log/Log.h:
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/third_party/zigbee/zboss_r23/include/zb_common.h:
 
@@ -601,3 +606,7 @@ C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/inc/hw_io
 syscfg/ti_drivers_config.h:
 
 C:/ti/simplelink_lowpower_f3_sdk_8_40_02_01/source/ti/devices/cc23x0r5/driverlib/cpu.h:
+
+C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/on_off_switch_ota_client.h:
+
+C:/Users/Sergey/workspace_v12/flower_ota_onchip_CC2340R5/zb_zcl_soil_moisture_measurement.h:

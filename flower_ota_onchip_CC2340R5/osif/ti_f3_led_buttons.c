@@ -43,6 +43,8 @@
 
 #include <stddef.h>
 
+#include <ti/log/Log.h>
+
 #include "zb_common.h"
 
 #include <ti/drivers/GPIO.h>
@@ -53,16 +55,20 @@
 #include <ti/devices/DeviceFamily.h>
 #include DeviceFamily_constructPath(driverlib/cpu.h)
 
+#include "on_off_switch_ota_client.h"
+
 /* Convenience macro to convert milliseconds into CPU delay cycles */
 #define CPU_convertMsToDelayCycles(milliseconds) \
     (((uint32_t)(milliseconds)) * (48000 / 3))
 
 static zb_uint8_t gs_inited = ZB_FALSE;
 static zb_uint8_t s_btn_max_num = 0;
-static zb_bool_t s_btn_debounce = ZB_FALSE;
+//static zb_bool_t s_btn_debounce = ZB_FALSE;
+static zb_bool_t s_btn_debounce = ZB_TRUE;
 SemaphoreP_Handle buttonSem = NULL;
 
 /***** Function definitions *****/
+
 /* GPIO interrupt Callback function for CONFIG_GPIO_BTN1 and CONFIG_GPIO_BTN2. */
 void button_callback(zb_uint8_t index)
 {
@@ -101,12 +107,17 @@ void button_callback(zb_uint8_t index)
 
   if (state)
   {
+    Log_printf(LogModule_Zigbee_App, Log_INFO, "button_on");
     zb_button_on_cb(button_no);
   }
   else
   {
+    Log_printf(LogModule_Zigbee_App, Log_INFO, "button_off");
     zb_button_off_cb(button_no);
   }
+
+  button_number = button_no;
+  button_state = state;
 #endif //defined ZB_COORDINATOR_ROLE || defined ZB_ROUTER_ROLE ||  defined ZB_ED_ROLE || !defined ZB_ZGPD_ROLE
 }
 
@@ -197,6 +208,32 @@ void zb_osif_led_off(zb_uint8_t led_no)
       /*Nothing to do*/
       break;
   }
+}
+
+void zb_osif_led_toggle(zb_uint8_t led_no)
+{
+    switch(led_no)
+    {
+      case 0U:
+        if (GPIO_read(CONFIG_GPIO_GLED) == 1U)
+        {
+          GPIO_write(CONFIG_GPIO_GLED, CONFIG_GPIO_LED_OFF);
+        } else {
+          GPIO_write(CONFIG_GPIO_GLED, CONFIG_GPIO_LED_ON);
+        }
+        break;
+      case 1U:
+        if (GPIO_read(CONFIG_GPIO_RLED) == 1U)
+        {
+          GPIO_write(CONFIG_GPIO_RLED, CONFIG_GPIO_LED_OFF);
+        } else {
+          GPIO_write(CONFIG_GPIO_RLED, CONFIG_GPIO_LED_ON);
+        }
+        break;
+      default:
+        /*Nothing to do*/
+        break;
+    }
 }
 
 void zb_osif_button_cb(zb_uint8_t arg)

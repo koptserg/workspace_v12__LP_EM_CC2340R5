@@ -34,6 +34,15 @@ extern "C" {
 
 
 /*
+ *  ======== ADC ========
+ */
+
+extern const uint_least8_t              CONFIG_ADC_0_CONST;
+#define CONFIG_ADC_0                    0
+#define CONFIG_TI_DRIVERS_ADC_COUNT     1
+
+
+/*
  *  ======== AESCCM ========
  */
 
@@ -63,6 +72,10 @@ extern const uint_least8_t              CONFIG_ECDH_ZB_CONST;
 /*
  *  ======== GPIO ========
  */
+/* Owned by CONFIG_ADC_0_CHANNEL as  */
+extern const uint_least8_t CONFIG_GPIO_ADC_0_CHANNEL_CONST;
+#define CONFIG_GPIO_ADC_0_CHANNEL 7
+
 extern const uint_least8_t CONFIG_GPIO_GLED_CONST;
 #define CONFIG_GPIO_GLED 15
 
@@ -74,6 +87,10 @@ extern const uint_least8_t CONFIG_GPIO_BTN1_CONST;
 
 extern const uint_least8_t CONFIG_GPIO_BTN2_CONST;
 #define CONFIG_GPIO_BTN2 9
+
+/* Owned by CONFIG_LGPTIMER_0 as  */
+extern const uint_least8_t CONFIG_GPIO_LGPTIMER_0_CH0_CONST;
+#define CONFIG_GPIO_LGPTIMER_0_CH0 24
 
 /* The range of pins available on this device */
 extern const uint_least8_t GPIO_pinLowerBound;
@@ -88,12 +105,34 @@ extern const uint_least8_t GPIO_pinUpperBound;
 
 
 /*
+ *  ======== LGPTimer ========
+ */
+
+/*
+ *  CH2: Unassigned
+ *  CH2N: Unassigned
+ */
+extern const uint_least8_t                  CONFIG_LGPTIMER_0_CONST;
+#define CONFIG_LGPTIMER_0                   0
+#define CONFIG_TI_DRIVERS_LGPTIMER_COUNT    1
+
+
+/*
  *  ======== NVS ========
  */
 
 extern const uint_least8_t              CONFIG_NVSINTERNAL_ZB_CONST;
 #define CONFIG_NVSINTERNAL_ZB           0
 #define CONFIG_TI_DRIVERS_NVS_COUNT     1
+
+
+/*
+ *  ======== PWM ========
+ */
+
+extern const uint_least8_t              CONFIG_PWM_0_CONST;
+#define CONFIG_PWM_0                    0
+#define CONFIG_TI_DRIVERS_PWM_COUNT     1
 
 
 

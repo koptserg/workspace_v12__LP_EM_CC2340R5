@@ -1,1 +1,1 @@
-extern const char app_version[];
+extern const char date_code[];
